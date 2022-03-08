@@ -6,7 +6,7 @@ class HandTracking:
 
     def __init__(self, img_static=False, nb_hands=2, complexity=1,
                  min_confidence=0.5, max_confidence=0.5):
-        self.img_static=img_static
+        self.img_static = img_static
         self.nb_hands = nb_hands
         self.complexity = complexity
         self.min_confidence = min_confidence
