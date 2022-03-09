@@ -44,15 +44,3 @@ class Geometry:
             return True
         else:
             return False
-
-    @staticmethod
-    def finger_detection(fx, fy, dico):
-        """
-         problem
-         we must take the x and y coordonn of the finger
-         compare if is in """
-        take_top, take_bom = None, None
-        for i in range(0, len(dico)):
-            init, inib = str(i) + "top", str(i) + "bom"
-            take_top, take_bom = dico[init], dico[inib]
-
