@@ -1,4 +1,3 @@
-
 class Main:
     def __init__(self, d):
         self.run = False
@@ -14,12 +13,14 @@ class Main:
         """change the value of run variable"""
         self.run = True
 
-    def show(self, img, title="my capture video"):
+    @staticmethod
+    def show(img, title="my capture video"):
         """this function aloaws to screening image"""
         cv2.imshow(title, img)
         cv2.waitKey(1)
 
-    def draw_number(self, img):
+    @staticmethod
+    def draw_number(img):
         """ create same text in the rectagle """
         font = cv2.FONT_HERSHEY_SCRIPT_SIMPLEX
         color = (255, 5, 10)
@@ -36,7 +37,7 @@ class Main:
         cv2.putText(img, "9", (450, 520), font, 5, color, 5)
         cv2.putText(img, "=", (450, 680), font, 5, color, 5)
 
-    def draw_calcl(self, img):
+    def draw_calcul(self, img):
         # main cadre
         cv2.rectangle(img, (20, 100), (600, 700), (255, 123, 0), 1)
         # first column
@@ -63,10 +64,13 @@ class Main:
             img = self.hand.detectingHand(img, draw=False)
             listcoord = self.hand.positionPoint(img, andPoint=False)
             if len(listcoord) != 0:
-                print(listcoord[4])
-                print("**************")
 
-            self.draw_calcl(img)
+
+
+
+
+
+            self.draw_calcul(img)
             self.show(img, title="calculatrice")
 
 
@@ -74,6 +78,7 @@ if __name__ == "__main__":
     import cv2
     from handTracking import HandTracking
     from coordo import *
+    from geometry import Geometry
 
     main = Main(dico)
     main.winsize()
