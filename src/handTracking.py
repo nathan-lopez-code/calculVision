@@ -69,7 +69,7 @@ def main():
     while running:
         cool, img = vid.read()
         img = hand_detection.detectingHand(img, draw=False)
-        listcoord, pointcoord = hand_detection.positionPoint(img, hand=1, point=4, draw=False)
+        listcoord, pointcoord = hand_detection.positionPoint(img, andPoint=True, draw=False)
         if len(listcoord) != 0 and len(pointcoord) != 0:
             print(listcoord[0])
             print("**************")
