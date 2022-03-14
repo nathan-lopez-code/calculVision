@@ -68,8 +68,8 @@ def main():
     # the event loop
     while running:
         cool, img = vid.read()
-        img = hand_detection.detectingHand(img, draw=False)
-        listcoord, pointcoord = hand_detection.positionPoint(img, andPoint=True, draw=False)
+        img = hand_detection.detectingHand(img, draw=True)
+        listcoord, pointcoord = hand_detection.positionPoint(img, andPoint=True, draw=True)
         if len(listcoord) != 0 and len(pointcoord) != 0:
             print(listcoord[0])
             print("**************")
