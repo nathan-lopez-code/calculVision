@@ -23,3 +23,30 @@ dico = {
             "12top": (406, 550), "12bom": (600, 700),   "=v": "=",
 
         }
+
+
+class Calculate:
+
+    def __init__(self, string):
+
+        self.string = string
+
+    def calcule(self, s):
+        """
+            take on string eg : 45+34*54/566-343*4+34
+        """
+        string = "34/4*6"
+        plus = string.count("+")
+        multi = string.count("*")
+        sous = string.count('-')
+        div = string.count('/')
+        if multi:
+            m = string.split("*")
+            for s in m:
+                self.calcule(s)
+
+
+
+
+if __name__ == '__main__' :
+    pass

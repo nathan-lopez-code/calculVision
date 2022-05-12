@@ -8,7 +8,7 @@ class Main:
         self.DEFAULT_VALUE = -1
         self.font = cv2.FONT_HERSHEY_SCRIPT_SIMPLEX
         self.init_value()
-        self.speed = 3
+        self.speed = 5
 
     def init_value(self):
         self.value1 = self.DEFAULT_VALUE
@@ -158,10 +158,73 @@ class Main:
             return value
 
 
+    @staticmethod
+    def listing(tt):
+
+        if tt.__contains__('3'):
+            index = tt.index('3')
+            tt[index] = 0
+            return 3
+
+
+        if tt.__contains__('1'):
+            index = tt.index('1')
+            tt[index] = 0
+            return 1
+
+        if tt.__contains__('2'):
+            index = tt.index('2')
+            tt[index] = 0
+            return 2
+
+        if tt.__contains__('3'):
+            index = tt.index('3')
+            tt[index] = 0
+            return 3
+        if tt.__contains__('4'):
+            index = tt.index('4')
+            tt[index] = 0
+            return 4
+        if tt.__contains__('5'):
+            index = tt.index('5')
+            tt[index] = 0
+            return 5
+        if tt.__contains__('6'):
+            index = tt.index('6')
+            tt[index] = 0
+            return 6
+
+        if tt.__contains__('7'):
+            index = tt.index('7')
+            tt[index] = 0
+            return 7
+        if tt.__contains__('8'):
+            index = tt.index('8')
+            tt[index] = 9
+            return 8
+        if tt.__contains__('9'):
+            index = tt.index('9')
+            tt[index] = 0
+            return 9
+
+        if tt.__contains__('0'):
+            index = tt.index('0')
+            tt[index] = 0
+            return 0
+        if tt.__contains__('+'):
+            index = tt.index('+')
+            tt[index] = 0
+            return 11
+        if tt.__contains__('='):
+            index = tt.index('=')
+            tt[index] = 0
+            return 12
+
     def main_loop(self):
         fvalue = int(time.time())
         value = "result"
-        t, tt = [[], [], [], [], [], [], [], [], [], [], [], []], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        t, tt = [[], [], [], [], [], [], [], [], [], [], [], []], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        my_string = ""
         while self.run:
             cool, img = self.vid.read()
             img = self.hand.detectingHand(img, draw=False)
@@ -223,7 +286,7 @@ class Main:
                 elif is_it6:
                     color6, taille6 = self.values(x, y, 6)[1]
                     self.value6 = self.values(x, y, 6)[0]
-                    self.do_this(fvalue, t, 5)
+                    self.do_this(fvalue, t, 6)
 
                 elif is_it7:
                     color7, taille7 = self.values(x, y, 7)[1]
@@ -314,16 +377,41 @@ class Main:
                 tt[11] = self.take_it(t, 12, value)
 
             # write text in windows
-            cv2.putText(img, value, (950, 70), self.font, 1, (234, 66, 7), 1)
             cv2.putText(img, str(fvalue), (950, 120), self.font, 1, (234, 66, 7), 1)
             # cv2.putText(img, str(tt), (950, 200), self.font, 1, (234, 66, 7), 1)
-
+            print(tt)
+            print("\n *************** \n")
             self.init_value()
             fvalue = int(time.time())
-            print(tt)
-            # drawing number
+            if value:
+                vals = Main.listing(tt)
+                if vals == 11:
+                    vals = "+"
+                elif vals == 12:
+                    vals = "="
+                if vals != None:
+                    l = len(my_string)
+
+                    if l > 0:
+                        if my_string[l-1] == str(vals) or my_string[l-1] == vals:
+                            my_string = my_string
+                        else:
+                            my_string = my_string + str(vals)
+                    else:
+                        my_string = my_string + str(vals)
+
+            print("\n\n" + my_string)
+            if my_string != "":
+                cv2.putText(img, my_string, (950, 70), self.font, 1, (234, 66, 7), 1)
+            else:
+                cv2.putText(img, "resulte", (950, 70), self.font, 1, (234, 66, 7), 1)
+
+
+
+            # show windows and draw  number
             self.draw_number(img, self.font)
             self.show(img, title="calculatrice")
+
 
 
 if __name__ == "__main__":
